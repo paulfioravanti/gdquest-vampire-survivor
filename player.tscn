@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvwmsv3feh7ux"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_1n7gg"]
+[ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://characters/happy_boo/happy_boo.tscn" id="1_38d8r"]
+[ext_resource type="PackedScene" uid="uid://d3nuf60srt7jn" path="res://gun.tscn" id="3_auwvr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y8hj1"]
+radius = 29.15
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ssa7o"]
+radius = 37.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ics7"]
+bg_color = Color(0.152941, 0.168627, 0.188235, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xttqm"]
+bg_color = Color(0.623529, 0.866667, 0.317647, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Player" type="CharacterBody2D"]
+platform_floor_layers = 0
+script = ExtResource("1_1n7gg")
+
+[node name="HappyBoo" parent="." instance=ExtResource("1_38d8r")]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_y8hj1")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Gun" parent="." instance=ExtResource("3_auwvr")]
+position = Vector2(0, -34)
+
+[node name="HurtBox" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_ssa7o")
+debug_color = Color(0.89146, 0.286942, 0.39534, 0.42)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -105.0
+offset_top = -127.0
+offset_right = 106.0
+offset_bottom = -108.0
+theme_override_styles/background = SubResource("StyleBoxFlat_1ics7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xttqm")
+value = 100.0
+show_percentage = false
