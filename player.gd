@@ -31,5 +31,6 @@ func _physics_process(delta: float) -> void:
     if overlapping_mobs.size() > 0:
         health -= _DAMAGE_RATE * overlapping_mobs.size() * delta
         %ProgressBar.value = health
+
         if health <= _MIN_HEALTH:
             health_depleted.emit()

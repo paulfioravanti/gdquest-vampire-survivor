@@ -6,16 +6,18 @@ const _SMOKE_SCENE: Resource = preload(
     "res://smoke_explosion/smoke_explosion.tscn"
 )
 const _MOB_VELOCITY: float = 300.0
+const _MIN_HEALTH: int = 0
+const _HEALTH_HIT: int = 1
 
 var health: int = 3
 
 @onready var player: Node = self.get_node("/root/Game/Player")
 
 func take_damage():
-    health -= 1
+    health -= _HEALTH_HIT
     %Slime.play_hurt()
 
-    if health == 0:
+    if health == _MIN_HEALTH:
         self.queue_free()
 
     var smoke: Variant = _SMOKE_SCENE.instantiate()
